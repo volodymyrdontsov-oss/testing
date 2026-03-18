@@ -77,7 +77,17 @@ The command will prompt you interactively:
 | `Enter passphrase (empty for no passphrase):` | Type a passphrase for extra security, or press **Enter** to skip. |
 | `Enter same passphrase again:` | Confirm the passphrase (or press **Enter** again). |
 
-Start the SSH agent and add your key (requires an **Administrator** PowerShell):
+The following commands require an **Administrator** PowerShell (right-click PowerShell and choose "Run as administrator").
+
+First, ensure the OpenSSH Client is installed (it is an optional Windows feature):
+
+```powershell
+Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
+```
+
+> If it prints `State : Installed`, you already have it and can move on.
+
+Then configure, start the SSH agent, and add your key:
 
 ```powershell
 Set-Service -Name ssh-agent -StartupType Automatic
@@ -85,7 +95,7 @@ Start-Service -Name ssh-agent
 ssh-add "$env:USERPROFILE\.ssh\id_ed25519"
 ```
 
-> **Note:** Each command above is self-contained. Run them one at a time. If you see `"Supply values for the following parameters: Name:"`, it means the `-Name ssh-agent` part was missing -- make sure to include it.
+> **Troubleshooting:** If `Set-Service` reports that `ssh-agent` was not found, the OpenSSH Client is not installed. Run the `Add-WindowsCapability` command above first.
 
 Then add the public key to your GitHub/GitLab account:
 
