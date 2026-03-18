@@ -69,6 +69,14 @@ If you prefer SSH over HTTPS for remote operations:
 ssh-keygen -t ed25519 -C "your.email@example.com"
 ```
 
+The command will prompt you interactively:
+
+| Prompt | What to do |
+|--------|------------|
+| `Enter file in which to save the key (.../.ssh/id_ed25519):` | Press **Enter** to accept the default location. |
+| `Enter passphrase (empty for no passphrase):` | Type a passphrase for extra security, or press **Enter** to skip. |
+| `Enter same passphrase again:` | Confirm the passphrase (or press **Enter** again). |
+
 Start the SSH agent and add your key:
 
 ```powershell
