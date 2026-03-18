@@ -77,13 +77,15 @@ The command will prompt you interactively:
 | `Enter passphrase (empty for no passphrase):` | Type a passphrase for extra security, or press **Enter** to skip. |
 | `Enter same passphrase again:` | Confirm the passphrase (or press **Enter** again). |
 
-Start the SSH agent and add your key:
+Start the SSH agent and add your key (requires an **Administrator** PowerShell):
 
 ```powershell
-Get-Service ssh-agent | Set-Service -StartupType Automatic
-Start-Service ssh-agent
+Set-Service -Name ssh-agent -StartupType Automatic
+Start-Service -Name ssh-agent
 ssh-add "$env:USERPROFILE\.ssh\id_ed25519"
 ```
+
+> **Note:** Each command above is self-contained. Run them one at a time. If you see `"Supply values for the following parameters: Name:"`, it means the `-Name ssh-agent` part was missing -- make sure to include it.
 
 Then add the public key to your GitHub/GitLab account:
 
